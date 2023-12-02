@@ -17,5 +17,15 @@ link_libraries(fmt::fmt)
 # Common includes
 include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
 
+# Common Compiler warnings
+add_compile_options(-pedantic -Wall -Wextra -Werror)
+
+if(NOT CMAKE_BUILD_TYPE MATCHES Debug)
+    # Enable LTO
+    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
+    # Enable CPU features
+    add_compile_options(-march=native)
+endif()
+
 # Each day of AOC
 add_subdirectory(day1)
